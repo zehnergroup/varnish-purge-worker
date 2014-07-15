@@ -1,0 +1,11 @@
+{
+  "name": "rdi-subscriber",
+  "version": "0.1.0",
+  "description": "A Redis Pub/Sub Subscriber to clear Varnish cache.",
+  "author": "Juan Manuel Lopez",
+  "dependencies": {
+    "redis": "^0.11.0",
+    "varnish": "^0.0.1",
+    "async": "^0.9.0"
+  }
+}

@@ -1,0 +1,24 @@
+# IDE / Text Editors backup files #
+###################################
+*.swo
+*.swo
+*.swp
+*.swp*
+.*.sw[a-z]
+*.un~
+.lvimrc
+*.vimrc*
+*~
+.#*
+*#
+\#*#
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+._.DS_Store
+Icon?
+Thumbs.db
+ehthumbs.db
