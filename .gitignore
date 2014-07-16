@@ -22,3 +22,8 @@
 Icon?
 Thumbs.db
 ehthumbs.db
+
+# Project files #
+#################
+
+config.json
