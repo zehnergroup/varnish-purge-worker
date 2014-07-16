@@ -1,0 +1,12 @@
+{
+    "redis": {
+        "host": "127.0.0.1",
+        "port": 6379,
+        "channel": "varnish:purge"
+    },
+    "varnish": {
+        "host": "127.0.0.1",
+        "port": 6082,
+        "secret_file": "/etc/varnish/secret"
+    }
+}

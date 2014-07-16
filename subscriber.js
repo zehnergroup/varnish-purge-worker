@@ -1,10 +1,22 @@
+var fs = require('fs'),
+    config = fs.readFileSync('./config.json');
+
+console.log('Loading configuration from file.');
+try {
+  config = JSON.parse(config);
+} catch (err) {
+  console.log('There has been an error parsing the configuration file (config.json).')
+  console.log(err);
+  process.exit(1);
+}
+
 var redis = require("redis"),
-    redis_client = redis.createClient(),
+    redis_client = redis.createClient(config.redis.port, config.redis.host),
     varnish = require('varnish'),
-    varnish_admin = new varnish.Admin('127.0.0.1', 6082, {file: '/etc/varnish/secret'});
+    varnish_admin = new varnish.Admin(config.varnish.host, config.varnish.port, {file: config.varnish.secret_file});
 
 console.log('Subscribe to Redis channel.');
-redis_client.subscribe("varnish:purge");
+redis_client.subscribe(config.redis.channel);
 
 console.log('Listening for Redis messages.');
 redis_client.on("message", function (channel, message) {
