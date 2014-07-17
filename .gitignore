@@ -25,5 +25,5 @@ ehthumbs.db
 
 # Project files #
 #################
-
 config.json
+node_modules
