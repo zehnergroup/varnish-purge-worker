@@ -26,17 +26,20 @@ redis_client.subscribe(config.redis.channel);
 console.log( info('Listening for Redis messages.') );
 redis_client.on("message", function (channel, message) {
 
-  var routes = (JSON.parse(message)).routes;
+  var message = JSON.parse(message),
+      host = message.domain,
+      routes = message.routes;
 
   if (routes.length) {
 
     for (i = 0; i < routes.length; i++) {
 
-      console.log( debug('ban.url ' + routes[i]) );
+      var command = 'ban req.http.host == "' + host +  '" && req.url ~ "' + routes[i] + '"';
 
-      varnish_admin.send('ban.url ' + routes[i], function(err, resp){
+      console.log( debug(command) );
+
+      varnish_admin.send(command, function(err, resp){
         if(err) return console.log( error('Varnish command failed') );
-        console.log( debug('Varnish response ' + resp) );
       });
 
     }
