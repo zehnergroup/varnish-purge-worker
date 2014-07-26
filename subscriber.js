@@ -17,8 +17,7 @@ try {
 
 var redis = require("redis"),
     redis_client = redis.createClient(config.redis.port, config.redis.host),
-    varnish = require('varnish'),
-    varnish_admin = new varnish.Admin(config.varnish.host, config.varnish.port, {file: config.varnish.secret_file});
+    varnish = require('varnish');
 
 console.log( info('Subscribe to Redis channel.') );
 redis_client.subscribe(config.redis.channel);
@@ -31,6 +30,8 @@ redis_client.on("message", function (channel, message) {
       routes = message.routes;
 
   if (routes.length) {
+
+    var varnish_admin = new varnish.Admin(config.varnish.host, config.varnish.port, {file: config.varnish.secret_file});
 
     for (i = 0; i < routes.length; i++) {
 
